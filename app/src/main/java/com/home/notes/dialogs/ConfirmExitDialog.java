@@ -1,6 +1,5 @@
 package com.home.notes.dialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -38,9 +37,6 @@ public class ConfirmExitDialog extends DialogFragment {
                     }
                 })
                 .create();
-
-
-
 
     }
 }

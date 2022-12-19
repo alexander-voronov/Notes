@@ -1,8 +1,6 @@
 package com.home.notes.data;
 
-import com.home.notes.R;
-
-public interface Constans {
+public interface Constants {
 
     public static final String NOTE = "NOTE";
     public static final String REQUEST_KEY = "REQUEST_KEY";
@@ -16,9 +14,5 @@ public interface Constans {
     public static final String DATE = "DATE";
     public static final String TAG = "HAPPY";
 
-
     public static final String TAG_EDIT_FRAGMENT = "TAG_EDIT_FRAGMENT";
-
-
-
 }

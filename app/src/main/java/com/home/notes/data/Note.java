@@ -1,8 +1,6 @@
 package com.home.notes.data;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Note implements Serializable {
     private Integer id;
@@ -12,7 +10,6 @@ public class Note implements Serializable {
     private String date;
 
 
-
     public Note(String title, String description, String importance, String date) {
         this.title = title;
         this.description = description;
@@ -20,7 +17,7 @@ public class Note implements Serializable {
         this.date = date;
     }
 
-    public Note(Integer id, String title, String description, String importance,  String date) {
+    public Note(Integer id, String title, String description, String importance, String date) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,7 +49,6 @@ public class Note implements Serializable {
         this.description = description;
     }
 
-
     public String getImportance() {
         return importance;
     }
@@ -65,7 +61,7 @@ public class Note implements Serializable {
         return date;
     }
 
-    public void setDate(String  date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

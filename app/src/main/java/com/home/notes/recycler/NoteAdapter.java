@@ -20,28 +20,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
-
     }
 
     private PopupMenuClickListener listener;
-    public void setOnPopupMenuItemClickListener (PopupMenuClickListener listener)
-    {
+
+    public void setOnPopupMenuItemClickListener(PopupMenuClickListener listener) {
         this.listener = listener;
     }
-
-
-
-   /* public interface OnNoteClickListener {
-        void onNoteClick(Note note);
-    }
-*/
-
-   /* private OnNoteClickListener listener;
-
-    public void setOnNoteClickListener(OnNoteClickListener listener) {
-        this.listener = listener;
-    }
-*/
 
     @NonNull
     @Override
@@ -50,14 +35,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.note_item, parent, false);
         return new NoteHolder(view, listener);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         holder.bind(notes.get(position));
-
-
     }
 
     @Override
@@ -69,6 +51,4 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
         notes = all;
         notifyItemRemoved(position);
     }
-
-
 }
