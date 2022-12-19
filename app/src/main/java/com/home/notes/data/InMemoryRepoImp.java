@@ -23,11 +23,10 @@ public class InMemoryRepoImp implements Repo {
     }
 
     @Override
-    public int create(Note note) {
+    public void create(Note note) {
         int id = counter++;
         note.setId(id);
         notes.add(note);
-        return id;
     }
 
     @Override
@@ -43,9 +42,7 @@ public class InMemoryRepoImp implements Repo {
     public void update(Note note) {
         for (int i = 0; i < notes.size(); i++) {
 
-            if (notes.get(i).getId().equals(note.getId()))
-            //if (notes.get(i).getId() ==note.getId())
-            {
+            if (notes.get(i).getId().equals(note.getId())) {
                 notes.set(i, note);
                 break;
             }
@@ -57,10 +54,11 @@ public class InMemoryRepoImp implements Repo {
     @Override
     public void delete(int id) {
         for (int i = 0; i < notes.size(); i++) {
-            if (notes.get(i).getId() == id){
+            if (notes.get(i).getId() == id) {
                 notes.remove(i);
                 counter--;
-            break;}
+                break;
+            }
         }
     }
 

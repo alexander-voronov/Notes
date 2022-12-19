@@ -3,7 +3,6 @@ package com.home.notes.dialogs;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.home.notes.R;
 
-public class AboutDialog  extends DialogFragment {
+public class AboutDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -35,4 +34,5 @@ public class AboutDialog  extends DialogFragment {
                     }
                 })
                 .create();
-}}
+    }
+}

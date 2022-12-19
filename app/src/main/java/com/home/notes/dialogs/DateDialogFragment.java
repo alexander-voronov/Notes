@@ -3,18 +3,17 @@ package com.home.notes.dialogs;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import com.home.notes.R;
-import com.home.notes.data.Constans;
+import com.home.notes.data.Constants;
 
 import java.util.Calendar;
 
@@ -65,10 +64,9 @@ public class DateDialogFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         Bundle date = new Bundle();
-        String newDate = view.getDayOfMonth() + "/" + (view.getMonth() + 1)+ "/" + view.getYear();
-        date.putString(Constans.DATE, newDate);
-        requireActivity().getSupportFragmentManager().setFragmentResult(Constans.REQUEST_DATE_KEY, date);
-
+        String newDate = view.getDayOfMonth() + "/" + (view.getMonth() + 1) + "/" + view.getYear();
+        date.putString(Constants.DATE, newDate);
+        requireActivity().getSupportFragmentManager().setFragmentResult(Constants.REQUEST_DATE_KEY, date);
 
     }
 }

@@ -12,22 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.home.notes.R;
-import com.home.notes.data.Constans;
+import com.home.notes.data.Constants;
 import com.home.notes.data.Note;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -53,8 +49,6 @@ public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDat
     Spinner importanceSpinner;
     EditText date;
 
-
-
     @Override
     public void onAttach(@NonNull Context context) {
 
@@ -65,7 +59,7 @@ public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDat
     public static NoteDialog getInstance(Note note) {
         NoteDialog dialog = new NoteDialog();
         Bundle args = new Bundle();
-        args.putSerializable(Constans.DIALOG_NOTE_KEY, note);
+        args.putSerializable(Constants.DIALOG_NOTE_KEY, note);
         dialog.setArguments(args);
         return dialog;
     }
@@ -77,7 +71,7 @@ public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDat
 
 
         Bundle args = getArguments();
-        note = (Note) args.getSerializable(Constans.DIALOG_NOTE_KEY);
+        note = (Note) args.getSerializable(Constants.DIALOG_NOTE_KEY);
         View dialog = LayoutInflater.from(requireContext()).inflate(R.layout.note_dialog, null);
 
         dialogTitle = dialog.findViewById(R.id.note_dialog_title);
@@ -122,7 +116,7 @@ public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDat
                 view,
                 yearSelected,
                 monthOfYearSelected,
-                dayOfMonthSelected) -> date.setText(yearSelected + "/" + (monthOfYearSelected+1) + "/" + dayOfMonthSelected));
+                dayOfMonthSelected) -> date.setText(yearSelected + "/" + (monthOfYearSelected + 1) + "/" + dayOfMonthSelected));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         String buttonText;
@@ -164,7 +158,6 @@ public class NoteDialog extends DialogFragment implements DatePickerDialog.OnDat
 
                 })
         ;
-
 
         return builder.create();
     }

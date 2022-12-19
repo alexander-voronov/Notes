@@ -3,33 +3,29 @@ package com.home.notes.fragments;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+
 import com.google.android.material.button.MaterialButton;
 import com.home.notes.R;
-import com.home.notes.data.Constans;
+import com.home.notes.data.Constants;
 import com.home.notes.data.Note;
 import com.home.notes.dialogs.DateDialogFragment;
 
 public class CreateNoteFragment extends Fragment {
-///
+
     private EditText title;
     private EditText description;
     private EditText date;
@@ -55,9 +51,7 @@ public class CreateNoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(Constans.TAG, "onCreate() called with Create farag");
-
-
+        Log.d(Constants.TAG, "onCreate() called with Create farag");
     }
 
     @Override
@@ -70,7 +64,6 @@ public class CreateNoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-
         super.onViewCreated(view, savedInstanceState);
 
         title = view.findViewById(R.id.fragment_create_title);
@@ -80,14 +73,13 @@ public class CreateNoteFragment extends Fragment {
         date = view.findViewById(R.id.fragment_create_date);
 
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener(Constans.REQUEST_DATE_KEY, this, new FragmentResultListener() {
+        requireActivity().getSupportFragmentManager().setFragmentResultListener(Constants.REQUEST_DATE_KEY, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String setDate = result.getString(Constans.DATE);
+                String setDate = result.getString(Constants.DATE);
                 date.setText(setDate);
             }
         });
-
 
 
         importanceSpinner = view.findViewById(R.id.fragment_create_importance_spinner);
@@ -95,7 +87,6 @@ public class CreateNoteFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 importance = (String) parent.getItemAtPosition(position);
-
             }
 
             @Override
@@ -107,51 +98,30 @@ public class CreateNoteFragment extends Fragment {
 
         initSpinner();
 
-        createNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle result = new Bundle();
-                Note createdNote = new Note(id, title.getText().toString(), description.getText().toString(), importance, date.getText().toString());
-                result.putSerializable(Constans.NOTE, createdNote);
-                requireActivity().getSupportFragmentManager().setFragmentResult(Constans.REQUEST_KEY, result);
+        createNote.setOnClickListener(v -> {
+            Bundle result = new Bundle();
+            Note createdNote = new Note(id, title.getText().toString(), description.getText().toString(), importance, date.getText().toString());
+            result.putSerializable(Constants.NOTE, createdNote);
+            requireActivity().getSupportFragmentManager().setFragmentResult(Constants.REQUEST_KEY, result);
 
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    requireActivity().getSupportFragmentManager().popBackStack();
-                } else {
-                    requireActivity().getSupportFragmentManager().beginTransaction().remove(CreateNoteFragment.this).commit();
-                }
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(CreateNoteFragment.this).commit();
             }
         });
 
-        setDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                DialogFragment newFragment = new DateDialogFragment();
-                newFragment.show(requireActivity().getSupportFragmentManager(), "datePicker");
-             /*   requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.list_fragment_holder, DateFragment.newInstance())  //EditNoteFragment.newInstance(note))
-                        .addToBackStack(null)
-                        .commit();*/
-            }
-
+        setDate.setOnClickListener(v -> {
+            DialogFragment newFragment = new DateDialogFragment();
+            newFragment.show(requireActivity().getSupportFragmentManager(), "datePicker");
         });
-
-
     }
 
-
     void initSpinner() {
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.note_importance_level,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         importanceSpinner.setAdapter(adapter);
     }
-
-
-
-
 }
